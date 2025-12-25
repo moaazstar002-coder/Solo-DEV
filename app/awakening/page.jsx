@@ -1,13 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { Sparkles, Zap, Crown, Terminal, Cpu, Box, Layout, Code2 } from "lucide-react";
+import { Sparkles, Zap, Crown, Code2 } from "lucide-react";
 
 const CLASSES = [
   {
     id: "Mage",
     name: "The Mage",
-    icon: <Sparkles className="w-8 h-8 text-purple-400" />,
+    icon: Sparkles,
     description: "Focus-driven. Minimizes distractions.",
     lore: '"The system is a puzzle, and you are the key. While others plan or meditate, you execute."',
     perks: ["Deep Work", "Clean Code", "Peaceful Mind"],
@@ -19,7 +19,7 @@ const CLASSES = [
   {
     id: "Hunter",
     name: "The Hunter",
-    icon: <Zap className="w-8 h-8 text-blue-400" />,
+    icon: Zap,
     description: "High Speed. Technical Mastery.",
     lore: '"Efficiency is everything. Why walk when you can teleport through the code? Your logic is your weapon."',
     stats: { speed: 95, focus: 80, management: 30 },
@@ -31,7 +31,7 @@ const CLASSES = [
   {
     id: "founder",
     name: "The Founder",
-    icon: <Crown className="w-8 h-8 text-yellow-400" />,
+    icon: Crown,
     description: "Visionary. Resource Management.",
     lore: '"Architecture matters more than syntax. You build systems that outlast the developer who wrote them."',
     stats: { speed: 50, focus: 60, management: 95 },
@@ -44,6 +44,7 @@ const CLASSES = [
 
 export default function AwakeningPage() {
   const [selectedClass, setSelectedClass] = useState(CLASSES[1]);
+  const IconComponent = selectedClass.icon;
 
   return (
     <div className="relative min-h-screen flex flex-col bg-[#020617] font-sans text-slate-200 selection:bg-blue-600 overflow-x-hidden">
@@ -79,43 +80,46 @@ export default function AwakeningPage() {
           <div className="lg:col-span-7 space-y-4">
             <h3 className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.3em] mb-6">Available_Designations</h3>
             
-            {CLASSES.map((cls) => (
-              <div
-                key={cls.id}
-                onClick={() => setSelectedClass(cls)}
-                className={`group relative p-[1px] rounded transition-all duration-300 cursor-pointer ${
-                  selectedClass.id === cls.id
-                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 shadow-[0_0_20px_rgba(59,130,246,0.2)]"
-                    : "bg-slate-800 hover:bg-slate-700"
-                }`}
-              >
-                <div className="bg-[#0f172a] p-5 flex flex-col sm:flex-row gap-5 items-center rounded">
-                  {/* Icon Box Instead of Image */}
-                  <div className={`w-16 h-16 shrink-0 rounded flex items-center justify-center bg-slate-900 border ${selectedClass.id === cls.id ? cls.border : 'border-slate-800'} transition-colors duration-500`}>
-                    {cls.icon}
-                  </div>
+            {CLASSES.map((cls) => {
+              const ClsIcon = cls.icon;
+              return (
+                <div
+                  key={cls.id}
+                  onClick={() => setSelectedClass(cls)}
+                  className={`group relative p-[1px] rounded transition-all duration-300 cursor-pointer ${
+                    selectedClass.id === cls.id
+                      ? "bg-gradient-to-r from-blue-500 to-cyan-500 shadow-[0_0_20px_rgba(59,130,246,0.2)]"
+                      : "bg-slate-800 hover:bg-slate-700"
+                  }`}
+                >
+                  <div className="bg-[#0f172a] p-5 flex flex-col sm:flex-row gap-5 items-center rounded">
+                    {/* Icon Box */}
+                    <div className={`w-16 h-16 shrink-0 rounded flex items-center justify-center bg-slate-900 border ${selectedClass.id === cls.id ? cls.border : 'border-slate-800'} transition-colors duration-500`}>
+                      <ClsIcon className={`w-8 h-8 ${cls.text}`} />
+                    </div>
 
-                  <div className="flex-grow text-center sm:text-left">
-                    <h4 className={`text-xl font-black uppercase tracking-tight ${selectedClass.id === cls.id ? cls.text : "text-white"}`}>
-                      {cls.name}
-                    </h4>
-                    <p className="text-slate-500 text-sm font-medium">{cls.description}</p>
-                  </div>
+                    <div className="flex-grow text-center sm:text-left">
+                      <h4 className={`text-xl font-black uppercase tracking-tight ${selectedClass.id === cls.id ? cls.text : "text-white"}`}>
+                        {cls.name}
+                      </h4>
+                      <p className="text-slate-500 text-sm font-medium">{cls.description}</p>
+                    </div>
 
-                  <div className="flex items-center gap-2">
-                    {selectedClass.id === cls.id ? (
-                      <div className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/50 text-blue-400 text-[10px] font-black tracking-widest uppercase animate-pulse">
-                        Active
-                      </div>
-                    ) : (
-                      <div className="w-8 h-8 rounded-full border border-slate-700 flex items-center justify-center text-slate-700 group-hover:border-slate-500 group-hover:text-slate-500 transition-colors">
-                        <Code2 className="w-4 h-4" />
-                      </div>
-                    )}
+                    <div className="flex items-center gap-2">
+                      {selectedClass.id === cls.id ? (
+                        <div className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/50 text-blue-400 text-[10px] font-black tracking-widest uppercase animate-pulse">
+                          Active
+                        </div>
+                      ) : (
+                        <div className="w-8 h-8 rounded-full border border-slate-700 flex items-center justify-center text-slate-700 group-hover:border-slate-500 group-hover:text-slate-500 transition-colors">
+                          <Code2 className="w-4 h-4" />
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Right: Detailed Analysis Report */}
@@ -123,7 +127,7 @@ export default function AwakeningPage() {
             <div className="bg-slate-900/50 backdrop-blur-xl border border-slate-800 rounded-lg p-8 relative overflow-hidden">
               {/* Decorative Background Icon */}
               <div className="absolute -top-10 -right-10 opacity-[0.03] rotate-12 pointer-events-none">
-                {React.cloneElement(selectedClass.icon, { size: 200 })}
+                <IconComponent size={200} />
               </div>
 
               <div className="relative z-10 space-y-8">

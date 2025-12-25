@@ -24,7 +24,7 @@ export default function Home() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
               <span className="text-xs font-bold text-blue-400 tracking-wider uppercase">
-                System Online v2.0
+                System Online v1.0
               </span>
             </div>
 
@@ -69,7 +69,7 @@ export default function Home() {
               <span className="text-slate-600 dark:text-slate-600">|</span>
               <div className="flex items-center gap-2 text-slate-400 text-sm font-mono">
                 <span className="text-yellow-500">🏆</span>
-                <span>Season 4 Ranking</span>
+                <span>Season 1 Ranking</span>
               </div>
             </div>
           </div>
