@@ -97,7 +97,7 @@ export default function Home() {
             GO_ROUTINES
           </span>
           <span className="text-lg font-bold font-mono text-slate-400 hover:text-blue-500 cursor-default transition-colors">
-            REACT_HOOKS
+            REACT_HOOKSs
           </span>
         </div>
       </div>
